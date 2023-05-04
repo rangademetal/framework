@@ -1,4 +1,4 @@
-class Variable:
+class Values:
     __STR__ = "STR"
     __INTEGER__ = "INTEGER"
     __BOOLEAN__ = "BOOLEAN"
@@ -8,3 +8,5 @@ class Variable:
     __PRIMARYKEY__ = "PRIMARY KEY"
     __FOREIGNKEY__ = "FOREIGN KEY"
     __UNIQUE__ = "UNIQUE"
+    __NOTNULL__ = "NOT NULL"
+    __AUTOINCREMENT__ = "AUTO INCREMENT"

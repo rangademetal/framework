@@ -6,7 +6,9 @@
         "PRIMARY_KEY": [
           {
             "column_name": "id",
-            "type": "uuid"
+            "type": "uuid",
+            "unique": true,
+            "auto_increment": true
           }
         ],
         "STR": [
