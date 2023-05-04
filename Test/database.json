@@ -1,0 +1,34 @@
+{
+  "SCHEMA": "test",
+  "TABLE": [
+    {
+      "Student": {
+        "PRIMARY_KEY": [
+          {
+            "column_name": "id",
+            "type": "uuid"
+          }
+        ],
+        "STR": [
+          {
+            "column_name": "first_name",
+            "length": 30,
+            "not_null": true,
+            "unique": false,
+            "type": "str"
+          },
+          {
+            "column_name": "last_name",
+            "lenght": 30,
+            "not_null": true,
+            "unique": false,
+            "type": "str"
+          }
+        ],
+        "INT": [
+
+        ]
+      }
+    }
+  ]
+}
