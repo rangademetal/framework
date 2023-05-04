@@ -6,4 +6,4 @@ class Attribution(Variables):
         self.database = database
         Variables.__init__()
 
-    if Variables.BOOLEAN in [True, False]:
+    # if Variables.BOOLEAN in [True, False]:
