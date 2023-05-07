@@ -19,7 +19,7 @@
           },
           {
             "column_name": "last_name",
-            "lenght": 30,
+            "length": 30,
             "not_null": true,
             "unique": false,
             "type": "str"

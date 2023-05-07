@@ -8,5 +8,4 @@ class Schema:
 
     def create_table(self, table):
         self.table = table
-
-
+        return self.table
