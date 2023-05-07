@@ -6,5 +6,11 @@ from schema import Schema
 
 
 if __name__ == '__main__':
-    database = "ID PRIMARY KEY,last_name STR(30)"
-    Attribution(database, Schema('test').create_schema()).get_attribution()
+    database = "ID_test PRIMARY KEY AUTO INCREMENT, last_name STR(30)"
+    print(database)
+    Attribution(
+        database,
+        Schema('test').create_schema(),
+        Schema('test').create_table('Student')
+    ).get_attribution()
+    print()

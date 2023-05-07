@@ -3,14 +3,12 @@
   "TABLE": [
     {
       "Student": {
-        "PRIMARY_KEY": [
-          {
+        "PRIMARY_KEY": {
             "column_name": "id",
             "type": "uuid",
             "unique": true,
             "auto_increment": true
-          }
-        ],
+        },
         "STR": [
           {
             "column_name": "first_name",
