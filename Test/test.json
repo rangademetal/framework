@@ -13,16 +13,23 @@
                     {
                         "column_name": "last_name",
                         "length": "30",
-                        "not_null": true,
+                        "not_null": false,
                         "unique": true,
                         "type": "str"
                     },
                     {
                         "column_name": "firstname",
-                        "length": "30",
+                        "length": "43",
                         "not_null": true,
-                        "unique": true,
+                        "unique": false,
                         "type": "str"
+                    }
+                ],
+                "BOOLEAN": [
+                    {
+                        "column_name": "istrue",
+                        "type": "boolean",
+                        "default": false
                     }
                 ]
             }

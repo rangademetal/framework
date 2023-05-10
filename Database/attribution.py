@@ -1,6 +1,6 @@
 from variable import Values
 import json
-
+import re
 class Attribution(Values):
     def __init__(self, database, schema, table):
         self.database = database.split(',')
@@ -11,13 +11,13 @@ class Attribution(Values):
             "SCHEMA": self.schema,
             "TABLE": [{self.table_name: {}}]}
 
-        self.STR = {"STR":[]}
+        self.STR = {"STR": []}
+        self.BOOLEAN = {"BOOLEAN": []}
 
-
-    # def
     def get_attribution(self):
-
         for attribute in self.database:
+            attribute = attribute.strip()
+
             if Values.__PRIMARYKEY__ in attribute:
                 PRIMARY_KEY = {
                     "PRIMARY_KEY": {
@@ -28,21 +28,39 @@ class Attribution(Values):
                 }
                 if Values.__AUTOINCREMENT__ in attribute:
                     PRIMARY_KEY["PRIMARY_KEY"].update({"auto_increment": True})
-                print(self.database_dict["TABLE"][0][self.table_name].update(PRIMARY_KEY))
+                self.database_dict["TABLE"][0][self.table_name].update(PRIMARY_KEY)
 
             if Values.__STR__ in attribute:
-                attribute = attribute.strip()
-                self.STR['STR'].append({
-                            "column_name": attribute.split(' ')[0],
-                            'length': '30',
-                            'not_null': True,
-                            'unique': True,
-                            'type': 'str'
-                        })
+                STR_LIST = {
+                    "column_name": attribute.split(' ')[0],
+                    'length': re.subn(r'\D', '', attribute)[0],
+                    'not_null': False,
+                    'unique': False,
+                    'type': 'str'
+                }
 
+                if Values.__NOTNULL__ in attribute:
+                    STR_LIST.update({'not_null': True})
+
+                if Values.__UNIQUE__ in attribute:
+                    STR_LIST.update({'unique': True})
+
+                self.STR['STR'].append(STR_LIST)
                 self.database_dict['TABLE'][0][self.table_name].update(self.STR)
 
-                # if Values.__NOTNULL__ in attribute:
+            if Values.__BOOLEAN__ in attribute:
+                BOOLEAN_LIST = {
+                    "column_name": attribute.split(' ')[0],
+                    "type": 'boolean'
+                }
+
+                if 'default=true' in attribute:
+                    BOOLEAN_LIST.update({'default': True})
+                elif 'default=false' in attribute:
+                    BOOLEAN_LIST.update({'default': False})
+
+                self.BOOLEAN['BOOLEAN'].append(BOOLEAN_LIST)
+                self.database_dict['TABLE'][0][self.table_name].update(self.BOOLEAN)
+
         with open('test.json', 'w') as filejson:
             json.dump(self.database_dict, filejson, indent=4)
-
