@@ -95,6 +95,9 @@ class Attribution(Values):
                 if Values.__NOTNULL__ in attribute:
                     DATE_LIST.update({'not_null': True})
 
+                self.DATE['DATE'].append(DATE_LIST)
+                self.database_dict['TABLE'][0][self.table_name].update(self.DATE)
+
             if Values.__DATETIME__ in attribute:
                 DATETIME_LIST = {
                      "column_name": attribute.split(' ')[0],
@@ -104,6 +107,9 @@ class Attribution(Values):
 
                 if Values.__NOTNULL__ in attribute:
                     DATETIME_LIST.update({"not_null": True})
+
+                self.DATETIME['DATETIME'].append(DATETIME_LIST)
+                self.database_dict['TABLE'][0][self.table_name].update(self.DATETIME)
 
 
 
