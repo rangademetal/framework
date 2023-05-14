@@ -18,9 +18,7 @@ class Attribution(Values):
         self.INTEGER = {"INTEGER": []}
         self.DATE = {"DATE": []}
         self.DATETIME = {"DATETIME": []}
-        self.FLOAT = {"FLOATE": []}
-
-
+        self.FLOAT = {"FLOAT": []}
 
     def get_attribution(self):
         for attribute in self.database:
@@ -71,7 +69,6 @@ class Attribution(Values):
                 self.database_dict['TABLE'][0][self.table_name].update(self.BOOLEAN)
 
             if Values.__INTEGER__ in attribute:
-
                 INTEGER_LIST = {
                     "column_name": attribute.split(' ')[0],
                     'length': re.subn(r'\D', '', attribute)[0],
@@ -86,17 +83,18 @@ class Attribution(Values):
                 self.database_dict['TABLE'][0][self.table_name].update(self.INTEGER)
 
             if Values.__DATE__ in attribute:
-                DATE_LIST = {
-                    "column_name": attribute.split(' ')[0],
-                    'not_null': False,
-                    'type': 'date'
-                }
+                if "DATE" == attribute.split(' ')[1]:
+                    DATE_LIST = {
+                        "column_name": attribute.split(' ')[0],
+                        'not_null': False,
+                        'type': 'date'
+                    }
 
-                if Values.__NOTNULL__ in attribute:
-                    DATE_LIST.update({'not_null': True})
+                    if Values.__NOTNULL__ in attribute:
+                        DATE_LIST.update({'not_null': True})
 
-                self.DATE['DATE'].append(DATE_LIST)
-                self.database_dict['TABLE'][0][self.table_name].update(self.DATE)
+                    self.DATE['DATE'].append(DATE_LIST)
+                    self.database_dict['TABLE'][0][self.table_name].update(self.DATE)
 
             if Values.__DATETIME__ in attribute:
                 DATETIME_LIST = {
@@ -111,7 +109,18 @@ class Attribution(Values):
                 self.DATETIME['DATETIME'].append(DATETIME_LIST)
                 self.database_dict['TABLE'][0][self.table_name].update(self.DATETIME)
 
+            if Values.__FLOAT__ in attribute:
+                FLOAT_LIST = {
+                    "colunm_name": attribute.split(' ')[0],
+                    'not_null': False,
+                    'type': 'float'
+                }
 
+                if Values.__NOTNULL__ in attribute:
+                    FLOAT_LIST.update({"not_null": True})
+
+                self.FLOAT['FLOAT'].append(FLOAT_LIST)
+                self.database_dict['TABLE'][0][self.table_name].update(self.FLOAT)
 
 
 

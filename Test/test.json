@@ -36,11 +36,39 @@
                     {
                         "column_name": "age",
                         "length": "7",
+                        "not_null": false,
+                        "type": "integer"
+                    },
+                    {
+                        "column_name": "test_int",
+                        "length": "13",
                         "not_null": true,
                         "type": "integer"
                     }
+                ],
+                "DATE": [
+                    {
+                        "column_name": "date_create",
+                        "not_null": true,
+                        "type": "date"
+                    }
+                ],
+                "DATETIME": [
+                    {
+                        "column_name": "datetime_create",
+                        "not_null": true,
+                        "type": "datetime"
+                    }
+                ],
+                "FLOAT": [
+                    {
+                        "colunm_name": "test_float",
+                        "not_null": false,
+                        "type": "float"
+                    }
                 ]
-            }
+            },
+
         }
     ]
 }

@@ -10,7 +10,11 @@ if __name__ == '__main__':
                "last_name STR(30) UNIQUE, " \
                "firstname STR(43) NOT NULL, " \
                "istrue BOOLEAN default=false," \
-               "age INTEGER(7) NOT NULL"
+               "age INTEGER(7)," \
+               "test_int INTEGER(13) NOT NULL," \
+               "date_create DATE NOT NULL," \
+               "datetime_create DATETIME NOT NULL," \
+               "test_float FLOAT"
     print(database)
     print(Schema('test').create_schema())
     Student = Schema('test').create_table('Student')

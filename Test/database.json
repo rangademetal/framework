@@ -24,11 +24,11 @@
             "unique": false,
             "type": "str"
           }
-        ],
-        "INT": [
-
         ]
       }
     }
-  ]
+  ],
+  "FOREIGN_KEY": [{
+
+  }]
 }
