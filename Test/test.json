@@ -31,6 +31,14 @@
                         "type": "boolean",
                         "default": false
                     }
+                ],
+                "INTEGER": [
+                    {
+                        "column_name": "age",
+                        "length": "7",
+                        "not_null": true,
+                        "type": "integer"
+                    }
                 ]
             }
         }

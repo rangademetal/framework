@@ -1,6 +1,8 @@
 from variable import Values
 import json
 import re
+
+
 class Attribution(Values):
     def __init__(self, database, schema, table):
         self.database = database.split(',')
@@ -13,6 +15,12 @@ class Attribution(Values):
 
         self.STR = {"STR": []}
         self.BOOLEAN = {"BOOLEAN": []}
+        self.INTEGER = {"INTEGER": []}
+        self.DATE = {"DATE": []}
+        self.DATETIME = {"DATETIME": []}
+        self.FLOAT = {"FLOATE": []}
+
+
 
     def get_attribution(self):
         for attribute in self.database:
@@ -61,6 +69,45 @@ class Attribution(Values):
 
                 self.BOOLEAN['BOOLEAN'].append(BOOLEAN_LIST)
                 self.database_dict['TABLE'][0][self.table_name].update(self.BOOLEAN)
+
+            if Values.__INTEGER__ in attribute:
+
+                INTEGER_LIST = {
+                    "column_name": attribute.split(' ')[0],
+                    'length': re.subn(r'\D', '', attribute)[0],
+                    'not_null': False,
+                    'type': 'integer'
+                }
+
+                if Values.__NOTNULL__ in attribute:
+                    INTEGER_LIST.update({'not_null': True})
+
+                self.INTEGER['INTEGER'].append(INTEGER_LIST)
+                self.database_dict['TABLE'][0][self.table_name].update(self.INTEGER)
+
+            if Values.__DATE__ in attribute:
+                DATE_LIST = {
+                    "column_name": attribute.split(' ')[0],
+                    'not_null': False,
+                    'type': 'date'
+                }
+
+                if Values.__NOTNULL__ in attribute:
+                    DATE_LIST.update({'not_null': True})
+
+            if Values.__DATETIME__ in attribute:
+                DATETIME_LIST = {
+                     "column_name": attribute.split(' ')[0],
+                     'not_null': False,
+                     'type': 'datetime'
+                }
+
+                if Values.__NOTNULL__ in attribute:
+                    DATETIME_LIST.update({"not_null": True})
+
+
+
+
 
         with open('test.json', 'w') as filejson:
             json.dump(self.database_dict, filejson, indent=4)
