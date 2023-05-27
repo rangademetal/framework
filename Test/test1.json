@@ -1,5 +1,6 @@
 {
-    "SCHEMA": "test",
+    "CREATE_TIME": "2023-05-25 14:07:49.661412",
+    "SCHEMA": "test1",
     "TABLE": [
         {
             "Student": {
@@ -67,8 +68,9 @@
                         "type": "float"
                     }
                 ]
-            },
-
+            }
         }
-    ]
+    ],
+    "PFK_LINK": [],
+    "VALUE": []
 }

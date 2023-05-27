@@ -1,17 +1,23 @@
-from variable import Values
+from Database.variable import Values
+from datetime import datetime
 import json
 import re
 
 
 class Attribution(Values):
-    def __init__(self, database, schema, table):
+    def __init__(self, database, schema, table, path):
         self.database = database.split(',')
+
         self.schema = schema
         self.table_name = table
 
         self.database_dict = {
+            "CREATE_TIME": str(datetime.now()),
             "SCHEMA": self.schema,
-            "TABLE": [{self.table_name: {}}]}
+            "TABLE": [{self.table_name: {}}],
+            "PFK_LINK": [],
+            "VALUE": []
+        }
 
         self.STR = {"STR": []}
         self.BOOLEAN = {"BOOLEAN": []}
@@ -20,7 +26,7 @@ class Attribution(Values):
         self.DATETIME = {"DATETIME": []}
         self.FLOAT = {"FLOAT": []}
 
-    def get_attribution(self):
+    def get_attribution(self, Schema):
         for attribute in self.database:
             attribute = attribute.strip()
 
@@ -98,9 +104,9 @@ class Attribution(Values):
 
             if Values.__DATETIME__ in attribute:
                 DATETIME_LIST = {
-                     "column_name": attribute.split(' ')[0],
-                     'not_null': False,
-                     'type': 'datetime'
+                    "column_name": attribute.split(' ')[0],
+                    'not_null': False,
+                    'type': 'datetime'
                 }
 
                 if Values.__NOTNULL__ in attribute:
@@ -122,7 +128,10 @@ class Attribution(Values):
                 self.FLOAT['FLOAT'].append(FLOAT_LIST)
                 self.database_dict['TABLE'][0][self.table_name].update(self.FLOAT)
 
-
-
-        with open('test.json', 'w') as filejson:
+        with open(f'{Schema}.json', 'w') as filejson:
             json.dump(self.database_dict, filejson, indent=4)
+
+    def get_values(self, insert):
+        insert = insert.split(' ')[2]
+
+

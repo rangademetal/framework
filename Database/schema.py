@@ -1,3 +1,4 @@
+
 class Schema:
     def __init__(self, schema):
         self.table = None
@@ -9,3 +10,4 @@ class Schema:
     def create_table(self, table):
         self.table = table
         return self.table
+

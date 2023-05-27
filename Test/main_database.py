@@ -1,11 +1,10 @@
-import sys
-
-sys.path.insert(0, 'F:\PichuDB\Database')
-
-from attribution import Attribution
-from schema import Schema
+from Database.attribution import Attribution
+from Database.schema import Schema
+from Settings.os_operation import OsOperation
 
 if __name__ == '__main__':
+    insert_ = "INSERT INTO Student VALUES (test)"
+
     database = "ID_test PRIMARY KEY AUTO INCREMENT, " \
                "last_name STR(30) UNIQUE, " \
                "firstname STR(43) NOT NULL, " \
@@ -15,14 +14,16 @@ if __name__ == '__main__':
                "date_create DATE NOT NULL," \
                "datetime_create DATETIME NOT NULL," \
                "test_float FLOAT"
-    print(database)
-    print(Schema('test').create_schema())
-    Student = Schema('test').create_table('Student')
-    Professor = Schema('test').create_table('Professor')
-    print(Student)
-    Attribution(
+
+    Student = Schema('test1').create_table('Student')
+
+    create_database = Attribution(
         database,
-        Schema('test').create_schema(),
-        Student
-    ).get_attribution()
-    print()
+        Schema('test1').create_schema(),
+        Student,
+        OsOperation(path=r'F:\PichuDB\Settings\Settings.json').path
+    )
+
+
+    create_database.get_attribution('test1')
+    create_database.get_values(insert_)

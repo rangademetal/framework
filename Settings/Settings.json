@@ -4,8 +4,9 @@
       "PASSWORD": "test"
   },
   "PATH_DB": {
-    "PATH":
-  },
+    "PATH":"F:\\PichuDB\\Test\\",
+    "SCHEMA_PATH": []
 
 
+  }
 }
